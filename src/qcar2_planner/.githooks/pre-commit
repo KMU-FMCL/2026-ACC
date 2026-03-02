@@ -1,0 +1,90 @@
+#!/bin/sh
+# Pre-commit hook: format and lint staged C++ files
+set -e
+
+. "$(dirname "$0")/../shell/logger.sh"
+
+# Get staged C++ files
+staged_files=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '\.(cpp|hpp|h)$' || true)
+
+if [ -z "$staged_files" ]; then
+  exit 0
+fi
+
+log_header "Pre-commit Validation"
+
+# Check if tools exist
+clang_format_exe=$(command -v clang-format || true)
+clang_tidy_exe=$(command -v clang-tidy || true)
+
+if [ -z "$clang_format_exe" ]; then
+  log_warning "clang-format not found, skipping format check"
+fi
+
+if [ -z "$clang_tidy_exe" ]; then
+  log_warning "clang-tidy not found, skipping lint check"
+fi
+
+# Format check
+if [ -n "$clang_format_exe" ]; then
+  log_info "Checking formatting..."
+
+  format_failed=false
+  for file in $staged_files; do
+    if [ -f "$file" ]; then
+      if ! "$clang_format_exe" --dry-run --Werror "$file" >/dev/null 2>&1; then
+        log_error "Format error: $file"
+        format_failed=true
+      fi
+    fi
+  done
+
+  if [ "$format_failed" = true ]; then
+    log_error "Some files need formatting. Run: cmake --build build/debug --target format-fix"
+    exit 1
+  fi
+
+  log_success "Format check passed"
+fi
+
+# Lint check (only .cpp files in library/ and application/)
+if [ -n "$clang_tidy_exe" ]; then
+  lint_files=$(echo "$staged_files" | grep -E '^(library|application)/.*\.cpp$' || true)
+
+  if [ -n "$lint_files" ]; then
+    log_info "Checking lint..."
+
+    # Find build directory with compile_commands.json
+    build_dir=""
+    for dir in build/debug build/release build/ci; do
+      if [ -f "$dir/compile_commands.json" ]; then
+        build_dir="$dir"
+        break
+      fi
+    done
+
+    if [ -z "$build_dir" ]; then
+      log_warning "No compile_commands.json found, skipping lint check"
+    else
+      lint_failed=false
+      for file in $lint_files; do
+        if [ -f "$file" ]; then
+          if ! "$clang_tidy_exe" -p "$build_dir" "$file" >/dev/null 2>&1; then
+            log_error "Lint error: $file"
+            lint_failed=true
+          fi
+        fi
+      done
+
+      if [ "$lint_failed" = true ]; then
+        log_error "Some files have lint issues. Run: cmake --build build/debug --target lint-fix"
+        exit 1
+      fi
+
+      log_success "Lint check passed"
+    fi
+  fi
+fi
+
+log_footer
+exit 0

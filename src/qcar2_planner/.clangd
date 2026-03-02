@@ -1,0 +1,15 @@
+# clangd Language Server Configuration
+# https://clangd.llvm.org/config.html
+
+Diagnostics:
+  # .clang-tidy is auto-discovered from the project root
+  UnusedIncludes: Strict
+
+InlayHints:
+  Enabled: true
+  ParameterNames: true
+  DeducedTypes: true
+  Designators: true
+
+Index:
+  Background: Build
