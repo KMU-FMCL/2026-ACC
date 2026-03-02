@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: acc-object-localizer
+Version: 1.0.0
+Summary: Object localizer for QCar2 using YOLO detections and RealSense depth
+Maintainer: jsm
+Maintainer-email: jsm@example.com
+License: MIT

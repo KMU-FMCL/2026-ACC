@@ -1,0 +1,12 @@
+[submodule "src/qcar2_lane_detection"]
+	path = src/qcar2_lane_detection
+	url = https://github.com/KMU-FMCL/qcar2_lane_detection.git
+[submodule "src/qcar2_perception_bringup"]
+	path = src/qcar2_perception_bringup
+	url = https://github.com/KMU-FMCL/qcar2_perception_bringup.git
+[submodule "src/qcar2_localization"]
+	path = src/qcar2_localization
+	url = https://github.com/KMU-FMCL/qcar2_localization.git
+[submodule "src/qcar2_object_detection"]
+	path = src/qcar2_object_detection
+	url = https://github.com/KMU-FMCL/qcar2_object_detection.git

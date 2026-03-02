@@ -1,0 +1,15 @@
+package.xml
+setup.cfg
+setup.py
+acc_object_localizer/__init__.py
+acc_object_localizer/object_localizer_node.py
+acc_object_localizer.egg-info/PKG-INFO
+acc_object_localizer.egg-info/SOURCES.txt
+acc_object_localizer.egg-info/dependency_links.txt
+acc_object_localizer.egg-info/entry_points.txt
+acc_object_localizer.egg-info/requires.txt
+acc_object_localizer.egg-info/top_level.txt
+acc_object_localizer.egg-info/zip-safe
+config/params.yaml
+launch/object_localizer.launch.py
+resource/acc_object_localizer

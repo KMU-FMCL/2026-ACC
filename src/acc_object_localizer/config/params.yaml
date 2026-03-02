@@ -1,0 +1,59 @@
+/**:
+  ros__parameters:
+    # Debug mode
+    debug: true
+
+    # ========== RGB Camera Intrinsics (640x480) ==========
+    # From QCar2 manual and GitHub FAQ
+    rgb_intrinsic:
+      fx: 455.2
+      fy: 459.43
+      cx: 308.53
+      cy: 213.56
+
+    # ========== Depth Camera Intrinsics (640x480) ==========
+    depth_intrinsic:
+      fx: 385.6
+      fy: 385.6
+      cx: 321.9
+      cy: 237.3
+
+    # ========== RGB to Depth Extrinsic (4x4 transformation matrix) ==========
+    # From QCar2 manual: RGB→Depth alignment
+    # Row-major order: [R11, R12, R13, tx, R21, R22, R23, ty, R31, R32, R33, tz, 0, 0, 0, 1]
+    # 🧪 TEST: Translation x 0.1 (reverse-direction test)
+    rgb_to_depth_extrinsic: [
+      1.0,        0.004008,   0.0001655,  -0.001474,
+      -0.004007,  1.0,       -0.003435,   -0.00004152,
+      -0.0001792, 0.003434,   1.0,        -0.00002451,
+      0.0,        0.0,        0.0,         1.0
+    ]
+
+    # ========== RealSense (Depth) to Body Extrinsic (4x4) ==========
+    # From QCar2 manual: realsense_to_body
+    # NOTE: Virtual QCar2 distances are 10x (real: 0.095m -> virtual: 0.95m)
+    # The values below are based on real QCar2; in virtual environments they may need 10x scaling.
+    realsense_to_body_extrinsic: [
+      0.0,  0.0,  1.0,  0.095,
+      -1.0, 0.0,  0.0,  0.032,
+      0.0, -1.0,  0.0,  0.172,
+      0.0,  0.0,  0.0,  1.0
+    ]
+
+    # ========== Depth Filtering ==========
+    depth_scale: 0.1        # Depth scale factor (virtual environment compensation: use 0.1 for 10x scale)
+    depth_min: 0.1          # Minimum valid depth (meters, after scaling)
+    depth_max: 50.0         # Maximum valid depth (meters, after scaling)
+    use_median_filter: false  # Whether to use median filter (true=filter on, false=raw depth)
+    depth_median_kernel_size: 5  # Median filter kernel size (pixels, must be odd)
+
+    # ========== Marker Visualization ==========
+    marker_scale: 0.1       # Marker size in meters (sphere radius)
+    marker_lifetime_sec: 1.0  # Marker lifetime in seconds
+
+    # ========== Topics ==========
+    depth_topic: '/camera/depth_image'  # Non-aligned depth
+    use_aligned_depth: false  # Apply RGB-to-Depth extrinsic transform (with 10x scale compensation)
+
+    # ========== Frame IDs ==========
+    base_frame: 'base_link'
