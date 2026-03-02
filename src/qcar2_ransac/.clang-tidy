@@ -1,0 +1,101 @@
+# Google C++ Style Guide Naming Conventions
+# https://google.github.io/styleguide/cppguide.html#Naming
+
+Checks: >
+  -*,
+  bugprone-*,
+  clang-analyzer-*,
+  concurrency-*,
+  cppcoreguidelines-*,
+  google-*,
+  misc-*,
+  modernize-*,
+  performance-*,
+  portability-*,
+  readability-*,
+  -bugprone-easily-swappable-parameters,
+  -bugprone-chained-comparison,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -cppcoreguidelines-owning-memory,
+  -misc-const-correctness,
+  -misc-use-internal-linkage,
+  -misc-no-recursion,
+  -misc-non-private-member-variables-in-classes,
+  -misc-include-cleaner
+
+# Treat warnings as errors
+WarningsAsErrors: "*"
+
+# Only check project headers
+HeaderFilterRegex: ".*/library/(include|source)/.*\\.(h|hpp)$"
+
+# Suppress diagnostics from system headers
+SystemHeaders: false
+
+CheckOptions:
+  # Namespace: lower_case
+  - { key: readability-identifier-naming.NamespaceCase, value: lower_case }
+
+  # Types: PascalCase
+  - { key: readability-identifier-naming.ClassCase, value: CamelCase }
+  - { key: readability-identifier-naming.StructCase, value: CamelCase }
+  - { key: readability-identifier-naming.StructIgnoredRegexp, value: "^rebind$" }
+  - { key: readability-identifier-naming.EnumCase, value: CamelCase }
+  - { key: readability-identifier-naming.TypedefCase, value: CamelCase }
+  - { key: readability-identifier-naming.TypeAliasCase, value: CamelCase }
+  - { key: readability-identifier-naming.TypeAliasIgnoredRegexp, value: "^(value_type|pointer|const_pointer|reference|const_reference|size_type|difference_type|other|iterator|const_iterator)$" }
+  - { key: readability-identifier-naming.TemplateParameterCase, value: CamelCase }
+
+  # Functions/Methods: PascalCase (except STL-required names)
+  - { key: readability-identifier-naming.FunctionCase, value: CamelCase }
+  - { key: readability-identifier-naming.FunctionIgnoredRegexp, value: "^(make_|swap).*$" }
+  - { key: readability-identifier-naming.MethodCase, value: CamelCase }
+  - { key: readability-identifier-naming.MethodIgnoredRegexp, value: "^(allocate|deallocate|construct|destroy|max_size|begin|end|size|empty|clear|push_back|pop_back|front|back|operator|swap).*$" }
+  - { key: readability-identifier-naming.ClassMethodCase, value: CamelCase }
+
+  # Variables: snake_case
+  - { key: readability-identifier-naming.VariableCase, value: lower_case }
+  - { key: readability-identifier-naming.ParameterCase, value: lower_case }
+  - { key: readability-identifier-naming.LocalVariableCase, value: lower_case }
+
+  # Member variables: snake_case with trailing underscore
+  - { key: readability-identifier-naming.ClassMemberCase, value: lower_case }
+  - { key: readability-identifier-naming.ClassMemberSuffix, value: _ }
+  - { key: readability-identifier-naming.PrivateMemberCase, value: lower_case }
+  - { key: readability-identifier-naming.PrivateMemberSuffix, value: _ }
+  - { key: readability-identifier-naming.ProtectedMemberCase, value: lower_case }
+  - { key: readability-identifier-naming.ProtectedMemberSuffix, value: _ }
+
+  # Struct members: snake_case (no suffix)
+  - { key: readability-identifier-naming.PublicMemberCase, value: lower_case }
+
+  # Constants: kCamelCase (Google Style Guide - based on storage duration)
+  # All constants use k prefix regardless of scope
+  - { key: readability-identifier-naming.ConstexprVariableCase, value: CamelCase }
+  - { key: readability-identifier-naming.ConstexprVariablePrefix, value: k }
+  - { key: readability-identifier-naming.GlobalConstantCase, value: CamelCase }
+  - { key: readability-identifier-naming.GlobalConstantPrefix, value: k }
+  - { key: readability-identifier-naming.StaticConstantCase, value: CamelCase }
+  - { key: readability-identifier-naming.StaticConstantPrefix, value: k }
+  - { key: readability-identifier-naming.MemberConstantCase, value: CamelCase }
+  - { key: readability-identifier-naming.MemberConstantPrefix, value: k }
+  - { key: readability-identifier-naming.LocalConstantCase, value: CamelCase }
+  - { key: readability-identifier-naming.LocalConstantPrefix, value: k }
+  - { key: readability-identifier-naming.LocalConstantPointerCase, value: CamelCase }
+  - { key: readability-identifier-naming.LocalConstantPointerPrefix, value: k }
+
+  # Enum values: kPascalCase
+  - { key: readability-identifier-naming.EnumConstantCase, value: CamelCase }
+  - { key: readability-identifier-naming.EnumConstantPrefix, value: k }
+
+  # Macros: UPPER_CASE (except header guards with trailing _)
+  - { key: readability-identifier-naming.MacroDefinitionCase, value: UPPER_CASE }
+  - { key: readability-identifier-naming.MacroDefinitionIgnoredRegexp, value: ".*_H(PP)?_$" }
+
+  # Magic number options: allow common mathematical constants as floats
+  - { key: readability-magic-numbers.IgnoredFloatingPointValues, value: "0.0;1.0;-1.0;2.0" }
+
+  # Other options
+  - { key: readability-implicit-bool-conversion.AllowIntegerConditions, value: 1 }
+  - { key: readability-implicit-bool-conversion.AllowPointerConditions, value: 1 }
+  - { key: readability-function-cognitive-complexity.IgnoreMacros, value: 1 }

@@ -1,0 +1,45 @@
+# Google C++ Style Guide
+# https://google.github.io/styleguide/cppguide.html
+
+Language: Cpp
+BasedOnStyle: Google
+
+# Line length (Google default: 80, but 100 is common)
+ColumnLimit: 100
+
+# Pointer/Reference alignment: Left (Google style)
+# int* x, not int *x or int * x
+DerivePointerAlignment: false
+PointerAlignment: Left
+ReferenceAlignment: Left
+
+# Braces: Attach (K&R style, Google default)
+# func() { not func()\n{
+BreakBeforeBraces: Attach
+
+# Indentation: 2 spaces (Google default)
+IndentWidth: 2
+TabWidth: 2
+UseTab: Never
+ContinuationIndentWidth: 4
+
+# Function style
+AllowShortFunctionsOnASingleLine: Inline
+AlwaysBreakTemplateDeclarations: Yes
+
+# Constructor initializer
+BreakConstructorInitializers: BeforeColon
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+
+# Include ordering
+IncludeBlocks: Regroup
+SortIncludes: CaseSensitive
+
+# Other Google defaults
+AccessModifierOffset: -1
+AlignAfterOpenBracket: Align
+AlignTrailingComments: false
+AllowShortIfStatementsOnASingleLine: WithoutElse
+AllowShortLoopsOnASingleLine: true
+SpaceAfterTemplateKeyword: true
+Standard: c++17

@@ -1,0 +1,79 @@
+# =============================================================================
+# clangd
+# =============================================================================
+# Auto-generated symlink (created by compile-commands CMake target)
+compile_commands.json
+
+# ROS2
+build/
+install/
+log/
+*.bag
+*.db3
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+.eggs/
+.Python
+
+# C++
+*.o
+*.a
+*.so
+*.dylib
+*.out
+*.app
+*.exe
+*.dll
+*.lai
+*.la
+*.lo
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.code-workspace
+
+# Backup files
+*~
+*.bak
+*.orig
+
+# Coverage
+.coverage
+htmlcov/
+*.gcda
+*.gcno
+*.gcov
+
+# Documentation build
+docs/_build/
+
+# Test results
+test_results/
+Testing/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Project
+context/
+design/

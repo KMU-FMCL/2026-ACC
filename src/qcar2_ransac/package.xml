@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>qcar2_ransac</name>
+  <version>0.0.1</version>
+  <description>RANSAC-based object localizer for QCar2 autonomous driving</description>
+  <maintainer email="taehun@kookmin.ac.kr">Taehun Jung</maintainer>
+  <license>GPL-3.0</license>
+  <url type="website">https://fmcl.kookmin.ac.kr/</url>
+  <url type="repository">https://git.fmcl.synology.me/2026-ACC/quanser/ros2/platform/3D-Object-localization.git</url>
+  <author email="eiffeltower1206@kookmin.ac.kr">Semin Jeon</author>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_cmake_python</buildtool_depend>
+
+  <!-- ROS2 Core (C++ and Python) -->
+  <depend>rclcpp</depend>
+  <depend>rclpy</depend>
+  <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>visualization_msgs</depend>
+
+  <!-- TF2 -->
+  <depend>tf2</depend>
+  <depend>tf2_ros</depend>
+  <depend>tf2_geometry_msgs</depend>
+  <depend>tf2_ros_py</depend>
+
+  <!-- OpenCV -->
+  <depend>cv_bridge</depend>
+  <depend>image_transport</depend>
+
+  <!-- Custom Messages -->
+  <depend>qcar2_msgs</depend>
+
+  <!-- Test dependencies -->
+  <test_depend>catch_ros2</test_depend>
+
+  <!-- Python dependencies -->
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-opencv</exec_depend>
+
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

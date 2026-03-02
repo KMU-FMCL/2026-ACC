@@ -1,0 +1,61 @@
+ransac_localizer:
+  ros__parameters:
+    # ========================================
+    # RGB Camera Intrinsics (640x480)
+    # ========================================
+    rgb_fx: 455.2    # Focal length x (pixels)
+    rgb_fy: 459.43   # Focal length y (pixels)
+    rgb_cx: 308.53   # Principal point x (pixels)
+    rgb_cy: 213.56   # Principal point y (pixels)
+
+    # ========================================
+    # Depth Camera Intrinsics (640x480)
+    # ========================================
+    depth_fx: 385.6   # Focal length x (pixels)
+    depth_fy: 385.6   # Focal length y (pixels)
+    depth_cx: 321.9   # Principal point x (pixels)
+    depth_cy: 237.3   # Principal point y (pixels)
+
+    # ========================================
+    # RANSAC Algorithm Parameters
+    # ========================================
+    ransac_iterations: 100    # Number of RANSAC iterations
+    ransac_threshold: 0.08    # Inlier threshold in meters (increased for noise tolerance)
+    min_inliers_ratio: 0.3    # Minimum ratio of inliers (0.0 ~ 1.0)
+    min_valid_points: 10      # Minimum valid depth points required in ROI
+
+    # ========================================
+    # Depth Processing Parameters
+    # ========================================
+    min_depth: 0.2            # Minimum valid depth (meters)
+    max_depth: 1.0            # Maximum valid depth (meters)
+    signal_color_max_depth: 2.0  # red/yellow/green labels use this max depth
+    signal_color_classes: ["red", "yellow", "green"]
+    depth_scale: 0.0001        # Scale factor: raw value to meters (mono16 = mm)
+
+    # ========================================
+    # Bounding Box ROI Parameters
+    # ========================================
+    # ROI is extracted from the center of the bounding box
+    # using (bbox_scale_min + bbox_scale_max) / 2 of the bbox size
+    bbox_scale_min: 0.3       # Minimum scale factor (30%)
+    bbox_scale_max: 0.5       # Maximum scale factor (50%)
+
+    # ========================================
+    # Object Tracking Parameters
+    # ========================================
+    tracking_distance: 1.0    # Max distance to associate with existing tracker (meters)
+    min_measurements: 5       # Minimum measurements before confirmation
+    std_threshold: 0.3        # Max standard deviation for confirmation (meters)
+    moving_avg_window: 10     # Window size for position averaging
+    duplicate_distance: 0.5   # Distance threshold for duplicate removal (meters)
+    dynamic_classes: ["*"]               # 모든 클래스 동적 처리
+    dynamic_update_alpha: 0.4  # Dynamic 클래스 위치 EMA 갱신 비율 (0~1)
+    dynamic_timeout_sec: 1.0   # 미검출 시 동적 객체 제거 시간(초)
+    hold_position_sec: 10.0    # Excluding specific classes, update confirmed position every N seconds
+    hold_excluded_classes: ["person", "red", "green", "yellow"]  # These classes keep continuous updates
+
+    # ========================================
+    # Processing Parameters
+    # ========================================
+    process_rate: 10.0        # Processing rate (Hz)
