@@ -1,0 +1,46 @@
+# Path definition in the QLabs coordinate frame.
+# Waypoints: named (x, y, z) positions.
+# Segments: ordered list connecting waypoints as 'line' or 'arc' types.
+#   line: requires 'start' and 'end' keys
+#   arc:  requires 'start', 'apex', and 'end' keys
+
+waypoints:
+  start: [-1.069, -1.0, 0.006]
+  "1": [0.0, -1.0, 0.006]
+  "2": [1.413, -1.061, 0.006]      # Corner 1 start
+  "3": [1.948, -0.823, 0.006]      # Corner 1 apex
+  "4": [2.210, -0.213, 0.006]      # Corner 1 end
+  "5": [2.210, 3.744, 0.006]       # Corner 2 start
+  "6": [1.966, 4.277, 0.006]       # Corner 2 apex
+  "7": [1.535, 4.414, 0.006]       # Corner 2 end
+  "8": [-1.192, 4.402, 0.006]      # Corner 3 start
+  "9": [-1.723, 4.127, 0.006]      # Corner 3 apex
+  "10": [-1.949, 3.569, 0.006]     # Corner 3 end
+  "11": [-1.937, 0.036, 0.006]
+  end: [-1.693, -0.385, 0.006]
+
+segments:
+  - type: line
+    start: start
+    end: "2"                        # Straight: start -> 1 -> 2
+  - type: arc
+    start: "2"
+    apex: "3"
+    end: "4"                        # Left turn, corner 1
+  - type: line
+    start: "4"
+    end: "5"                        # Straight: 4 -> 5
+  - type: arc
+    start: "5"
+    apex: "6"
+    end: "7"                        # Left turn, corner 2
+  - type: line
+    start: "7"
+    end: "8"                        # Straight: 7 -> 8
+  - type: arc
+    start: "8"
+    apex: "9"
+    end: "10"                       # Left turn, corner 3
+  - type: line
+    start: "10"
+    end: end                        # Straight: 10 -> 11 -> finish
